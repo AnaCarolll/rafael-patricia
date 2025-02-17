@@ -1,0 +1,25 @@
+SQL
+    admin
+        cadastra produtos
+    
+    usuário
+        escolhe o produto
+
+    tabelas
+        produto (id, imagemUrl, nome, link)
+        cliente (id, email, senha)
+        produtos_escolhidos (cliente_id, produto_id)
+
+template
+    pagina_escolha
+    pagina_login
+    pagina_adm
+    pagina_create_user
+
+backend
+    POST - /produto {} 
+    GET  - /produtos
+    GET  - /produtos_disponiveis
+    GET  - /login
+    GET  - /produtos_escolhidos/:client_id
+

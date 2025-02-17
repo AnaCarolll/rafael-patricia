@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script defer src="./script.js"></script>
+</head>
+
+<body>
+
+    <!-- <img width="200" src="https://down-br.img.susercontent.com/file/sg-11134201-7rdxa-m0t5yr5yle4pf1.webp" alt=""> -->
+
+    <!-- produto (id, imagemUrl, nome, link) -->
+    <section class="p-2 m-auto">
+
+        <div class="mb-7 block">
+            <h1 class="text-2xl mb-3">produto</h1>
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="imagemUrl" placeholder="imagemUrl" value="https://down-br.img.susercontent.com/file/br-11134207-7r98o-m4sab5aehws591.webp">
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="nome" placeholder="nome" value="bolsa rosa">
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="link" placeholder="link" value="https://shopee.com.br/Mochila-Bolsa-Coreana-Escolar-De-Grande-Capacidade-P-Estudante-Feminina-Imperme%C3%A1vel-i.392239188.23891631236?is_from_login=true">
+            <button id="produto" class="p-1 px-4 rounded bg-blue-500 text-white hover:bg-blue-300 cursor-pointer">Salvar</button>
+        </div>
+
+        <!-- cliente (id, email, senha) -->
+        <div class="mb-7 block">
+            <h1 class="text-2xl mb-3">cliente</h1>
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="email" placeholder="email" value="maria">
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="hierarquia" placeholder="hierarquia" value="1">
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="senha" placeholder="senha" value="1234">
+            <button id="cliente" class="p-1 px-4 rounded bg-blue-500 text-white hover:bg-blue-300 cursor-pointer">Salvar</button>
+        </div>
+
+        <!-- produtos_escolhidos (cliente_id, produto_id) -->
+        <div class="mb-7 block">
+            <h1 class="text-2xl mb-3">produtos_escolhidos</h1>
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="cliente_id" placeholder="cliente_id" value="1">
+            <input class="mb-1 p-2 block bg-red-100" type="text" id="produto_id" placeholder="produto_id" value="1">
+            <button id="produtos_escolhidos" class="p-1 px-4 rounded bg-blue-500 text-white hover:bg-blue-300 cursor-pointer">Salvar</button>
+        </div>
+    </section>
+
+
+
+
+</body>
+
+</html>
