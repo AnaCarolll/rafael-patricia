@@ -96,7 +96,7 @@ input {
 }
 
 .password-container input {
-    padding-right: 30px; /* Para evitar sobreposição do ícone */
+    padding-right: 30px; 
 }
 
 .toggle-password {

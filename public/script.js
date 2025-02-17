@@ -1,23 +1,19 @@
-// produto
 const imagemUrl = document.querySelector("#imagemUrl")
 const nome = document.querySelector("#nome")
 const link = document.querySelector("#link")
 
-// cliente
 const email = document.querySelector("#email")
 const senha = document.querySelector("#senha")
 const hierarquia = document.querySelector("#hierarquia")
 
-// produtos_escolhidos
+
 const cliente_id = document.querySelector("#cliente_id")
 const produto_id = document.querySelector("#produto_id")
 
-// botões
 const produto = document.querySelector("#produto")
 const cliente = document.querySelector("#cliente")
 const produtos_escolhidos = document.querySelector("#produtos_escolhidos")
 
-// função enviar
 function record(nome_table, obj) {
 
     fetch('http://localhost:3000/add/' + nome_table, {
@@ -37,9 +33,7 @@ function record(nome_table, obj) {
 }
 
 
-// EVENTOS
 
-// produto
 produto.addEventListener('click', () => {
     const obj = {
         imagemUrl: imagemUrl.value,

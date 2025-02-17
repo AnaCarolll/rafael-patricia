@@ -16,14 +16,6 @@ const input_quantidade = document.getElementById('input_quantidade')
 
 const inputs = Array.from(document.querySelectorAll('.sel'))
 
-// const inputs = [
-//     input_nome,
-//     input_id,
-//     input_link,
-//     input_imagemUrl,
-//     input_quantidade
-// ]
-
 const names = inputs.map(e => e.id.split('_')[1])
 
 const baseUrl = {

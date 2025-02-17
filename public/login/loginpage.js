@@ -24,8 +24,7 @@ function POST(url, obj) {
                 resolve(data)
                 refreshData()
                 return data
-                // input_checkbox_edit.checked = false
-                // input_checkbox_delete.checked = false
+            
             })
             .catch(error => {
                 reject(error)
@@ -71,10 +70,7 @@ btn_signin.addEventListener('click', e => {
     })
         .then(response => response.json())
         .then(data => {
-            // if (data.token === 'não existe usuário') {
-            //     alert('Usuário não  Verifique suas credenciais ou crie uma conta.');
-            //     return;
-            // }
+           
             console.log(data)
             if(data.token == 'não existe usuário') return
             localStorage.setItem('token', data.token)

@@ -2,7 +2,6 @@ const token = localStorage.getItem('token')
 
 async function confirmar() {
 
-  // gera objeto
   const dataToken = await getJsonW('http://localhost:3000/getinfotoken/' + token)
   const obj = {
     id: dataToken.id,
@@ -12,7 +11,6 @@ async function confirmar() {
 
   console.log(obj)
 
-  // diminui os valores escolhidos anteriormente -1
   const produto_id_old = await getJsonW('http://localhost:3000/produtos_id/' + obj.cliente_id)
   if (Object.keys(produto_id_old).includes('erro')) {
     console.log('não apagou')
@@ -21,12 +19,9 @@ async function confirmar() {
   }
 
 
-  // deleta os produtos escolhidos pelo cliente anteriormente
   const deletado = await getJsonW('http://localhost:3000/delete2/produtos_escolhidos/cliente_id=' + obj.id)
 
-  // adiciona dado novo
   const postagem = await postJsonW('http://localhost:3000/add/produtos_escolhidos', obj)
-  // console.log(postagem)
 
   const produto_id = await getJsonW('http://localhost:3000/produtos_id/' + obj.cliente_id)
   produto_id?.produto_id.split(',').forEach(plus)
@@ -39,31 +34,8 @@ async function confirmar() {
     icon: "success"
   });
 
-  // atualiza produtos
   getJson('http://localhost:3000/lista/produto', e => vue.produtos = e)
 
-  // console.log(promise)
-  // console.log(obj)
-
-  // getJson('http://localhost:3000/getinfotoken/' + token, e => {
-  //   const obj = {
-  //     id: e.id,
-  //     cliente_id: e.id,
-  //     produto_id: Array.from(document.querySelectorAll('input:checked')).map(e => e.id).join(','),
-  //   }
-  //   obj.produto_id.split(",").map(num => getJson('http://localhost:3000/plus/' + num))
-  //   getJson('http://localhost:3000/delete2/produtos_escolhidos/cliente_id=' + e.id, e => {
-  //     postJson('http://localhost:3000/add/produtos_escolhidos', obj, el => {
-  //       itemsMarked(obj.id)
-  //       getJson('http://localhost:3000/lista/produto', e => { vue.produtos = e })
-  //       Swal.fire({
-  //         title: "Perfeito",
-  //         text: "Parabéns pela escolha",
-  //         icon: "success"
-  //       });
-  //     })
-  //   })
-  // })
 }
 
 const data = { token: localStorage.getItem('token') }

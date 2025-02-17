@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./loginpage.css">
-    <!-- <link rel="stylesheet" href="./js/loginpage.js"> -->
     <script defer src="./js/loginpage.js"></script>
 </head>
 
@@ -69,7 +68,6 @@
     </div>
     
 
-    <!-- <script src="script.js"></script> -->
 </body>
 
 </html>
@@ -79,13 +77,13 @@ function togglePassword(inputId, eyeIconId) {
     var senhaInput = document.getElementById(inputId);
     var eyeIcon = document.getElementById(eyeIconId);
 
-    if (senhaInput && eyeIcon) { // Verifica se os elementos existem
+    if (senhaInput && eyeIcon) { 
         if (senhaInput.type === "password") {
             senhaInput.type = "text";
-            eyeIcon.textContent = "👁️‍🗨️"; // Ícone diferente para indicar visibilidade
+            eyeIcon.textContent = "👁️‍🗨️"; 
         } else {
             senhaInput.type = "password";
-            eyeIcon.textContent = "👁️"; // Ícone original
+            eyeIcon.textContent = "👁️"; 
         }
     } else {
         console.error("Erro: Elemento não encontrado!", inputId, eyeIconId);
@@ -96,7 +94,7 @@ function showEyeIcon(inputId, eyeIconId) {
     var senhaInput = document.getElementById(inputId);
     var eyeIcon = document.getElementById(eyeIconId);
 
-    if (senhaInput && eyeIcon) { // Verifica se os elementos existem
+    if (senhaInput && eyeIcon) { 
         if (senhaInput.value.length > 0) {
             eyeIcon.style.display = "inline";
         } else {

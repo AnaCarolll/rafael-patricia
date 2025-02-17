@@ -7,32 +7,15 @@ const bt_delete = document.getElementById('bt_delete')
 const input_checkbox_edit = document.getElementById('input_checkbox_edit')
 const input_checkbox_delete = document.getElementById('input_checkbox_delete')
 
-// inputs
-// const input_id = document.getElementById('input_id')
-// const input_nome = document.getElementById('input_nome')
-// const input_imagemUrl = document.getElementById('input_imagemUrl')
-// const input_link = document.getElementById('input_link')
-// const input_quantidade = document.getElementById('input_quantidade')
+
 
 
 const inputs = Array.from(document.querySelectorAll('.sel'))
-
-// const inputs = [
-//     input_nome,
-//     input_id,
-//     input_link,
-//     input_imagemUrl,
-//     input_quantidade
-// ]
-// 'input_produto_id'.match(/_(.+)/)[1]
-
-// localStorage.token
 
 
 const names = inputs.map(e => e.id.match(/_(.+)/)[1])
 
 const baseUrl = {
-    // tablename: 'produto',
     tablename: document.body.id,
     delete: 'http://localhost:3000/delete/',
     update: 'http://localhost:3000/update/'+localStorage.getItem('token')+'/',
@@ -96,9 +79,7 @@ async function del(id) {
     const lista = await getJsonW(baseUrl.produtos_id + id)
 
     console.log(lista)
-    // linha importante
     lista.produto_id?.split(',').map(e => less(e))
-    // lista.produto_id.split(',').map(e => console.log(e))
 
     getJson(baseUrl.delete + baseUrl.tablename + '/' + id, e => {
         refreshData()
@@ -128,13 +109,8 @@ bt_adicionar.addEventListener('click', () => {
 })
 
 function refreshData() {
-    // const id_list = []
     getJson(baseUrl.list + baseUrl.tablename, e => vue.produtos = e)
-    // fetch(baseUrl.list + baseUrl.tablename)
-    //     .then(e => e.json())
-    //     .then(e => {
-    //         vue.produtos = e
-    //     })
+  
 }
 
 //funcs
