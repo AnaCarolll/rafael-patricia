@@ -16,10 +16,11 @@ body {
 
 .login-container {
     background-color: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
+    height: 305px;
 }
 
 h2 {
@@ -35,6 +36,11 @@ label {
     display: block;
     font-size: 14px;
     margin-bottom: 5px;
+}
+
+label:hover {
+    color: #007bff;
+    cursor: pointer;
 }
 
 input {
@@ -67,7 +73,7 @@ input {
     margin-top: 15px;
 }
 
-.buttons-float{
+/* .buttons-float{
     position: absolute;
     top: 10px;
     left: 0px;
@@ -76,7 +82,7 @@ input {
     margin: auto;
     display: flex;
     gap: 10px;
-}
+} */
 
 .radio{display: none;}
 
@@ -86,8 +92,6 @@ input {
 .radio:checked + *{
     display: block;
 }
-
-
 
 .password-container {
     position: relative;
