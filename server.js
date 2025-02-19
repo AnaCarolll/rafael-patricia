@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 
 // Rota GET
 app.get('/', (req, res) => {
-    res.redirect('./loginpage.html')
+    res.redirect('/login/loginpage.html')
     // res.send('Hello, Jairo! Bem-vindo ao servidor Express.');
 });
 
@@ -299,5 +299,5 @@ app.get('/less/:id', (req, res) => {
 
 // Inicia o servidor
 app.listen(3000, () => {
-    console.log(`Servidor rodando em localhost`);
+    console.log(`Servidor rodando em localhost:3000`);
 });
