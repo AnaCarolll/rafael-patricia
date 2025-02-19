@@ -1,0 +1,1 @@
+    - Desaparecer os itens quando usuário escolher do front e ajustar o back pra não listar novamente
