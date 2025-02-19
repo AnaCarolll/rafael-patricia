@@ -149,8 +149,6 @@ async function getJsonW(url, callback) {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json())
-        .catch(err => callback({ msg: 'Erro: ' + err.message }))
 }
 
 async function postJsonW(url, obj, callback) {
@@ -170,33 +168,82 @@ async function postJsonW(url, obj, callback) {
 atualizar_produtos_escolhidos()
 
 function atualizar_produtos_escolhidos() {
-
     if (window.location.href.includes('produtos_escolhidos')) {
-
         const listas = {
             clientes: [],
             produtos: [],
             produtos_escolhidos: []
-        }
+        };
 
-        getJson(baseUrl.list+'cliente', clientes => listas.clientes = clientes)
-        getJson(baseUrl.list+'produto', produtos => listas.produtos = produtos)
-        getJson(baseUrl.list+'produtos_escolhidos', produtos_escolhidos => {
+        // Promessas para buscar os dados primeiro
+        const clientesPromise = new Promise(resolve => {
+            getJson(baseUrl.list + 'cliente', clientes => {
+                listas.clientes = clientes || [];
+                resolve();
+            });
+        });
 
+        const produtosPromise = new Promise(resolve => {
+            getJson(baseUrl.list + 'produto', produtos => {
+                listas.produtos = produtos || [];
+                resolve();
+            });
+        });
 
-            const numbersToImages = arr => arr.split(',').map(e => `<div class='ttip square' msg='${listas.produtos.find(g => g.id == e).nome}'><img src='${listas.produtos.find(g => g.id == e).imagemUrl}'></div>`)
-            const numbersToNames = arr => arr.split(',').map(e => listas.produtos.find(g => g.id == e).nome)
+        // Após carregar clientes e produtos, buscar os produtos escolhidos
+        Promise.all([clientesPromise, produtosPromise]).then(() => {
+            getJson(baseUrl.list + 'produtos_escolhidos', produtos_escolhidos => {
+                console.log("Resposta da API:", produtos_escolhidos); // Verificar resposta da API
 
-            listas.produtos_escolhidos = produtos_escolhidos
+                if (!produtos_escolhidos) {
+                    console.error("Erro: produtos_escolhidos é undefined ou null!");
+                    return;
+                }
 
-            produtos_escolhidos.map(item => {
-                item.cliente_email = listas.clientes.find(e => e.id == item.cliente_id).email
-                item.images = numbersToImages(item.produto_id).join('')
-                item.nomes = numbersToNames(item.produto_id).map(e => `<i>${e}</i>`).join("")
-            })
+                // Se for uma string JSON, converter para array
+                if (typeof produtos_escolhidos === "string") {
+                    try {
+                        produtos_escolhidos = JSON.parse(produtos_escolhidos);
+                    } catch (error) {
+                        console.error("Erro ao fazer parse do JSON:", error);
+                        return;
+                    }
+                }
 
-            vue.users = listas.produtos_escolhidos
-        })
+                // Verificar se a resposta é um array
+                if (!Array.isArray(produtos_escolhidos)) {
+                    console.error("Erro: produtos_escolhidos não é um array!", produtos_escolhidos);
+                    return;
+                }
+
+                // Funções auxiliares
+                const numbersToImages = arr => 
+                    arr.split(',').map(e => {
+                        const produto = listas.produtos.find(g => g.id == e);
+                        return produto ? `<div class='ttip square' msg='${produto.nome}'><img src='${produto.imagemUrl}'></div>` : '';
+                    });
+
+                const numbersToNames = arr => 
+                    arr.split(',').map(e => {
+                        const produto = listas.produtos.find(g => g.id == e);
+                        return produto ? produto.nome : '';
+                    });
+
+                // Atualizar lista
+                listas.produtos_escolhidos = produtos_escolhidos.map(item => ({
+                    ...item,
+                    cliente_email: listas.clientes.find(e => e.id == item.cliente_id)?.email || "Email não encontrado",
+                    images: numbersToImages(item.produto_id).join(''),
+                    nomes: numbersToNames(item.produto_id).map(e => `<i>${e}</i>`).join("")
+                }));
+
+                // Atualizar Vue
+                vue.users = listas.produtos_escolhidos;
+                console.log("Dados finais processados:", vue.users);
+            });
+        }).catch(error => {
+            console.error("Erro ao carregar dados:", error);
+        });
     }
 }
 
