@@ -1,16 +1,10 @@
-// const express = require('express');
-// const path = require('path');
 
-// const sql = require('./sql.js')
 
 import express from "express";
 const app = express();
 const port = 3000;
 import sql from './sql.js';
 
-// app.use((req, res, next) => {
-//     res.status(404).send('Página não encontrada'); 
-// });
 app.use(express.static("public"));
 app.use(express.json());
 
@@ -45,8 +39,7 @@ app.use((req, res, next) => {
 
 // Rota GET
 app.get('/', (req, res) => {
-    res.redirect('./loginpage.html')
-    // res.send('Hello, Jairo! Bem-vindo ao servidor Express.');
+    res.redirect(__dirname + '/login/loginpage.html')
 });
 
 app.post('/login', (req, res) => {
@@ -194,7 +187,6 @@ app.post('/cliente', (req, res) => {
     sql.insert('cliente', obj)
         .then(e => res.json({ mensagem: e }))
 
-    // res.json({ mensagem: msg });
 });
 
 app.post('/produtos_escolhidos', (req, res) => {
@@ -209,19 +201,14 @@ app.post('/produtos_escolhidos', (req, res) => {
 
 app.post('/add/:tablename', (req, res) => {
 
-    // const cliente_id = tokens[req.headers.authorization].id
     const cliente_id = ''
 
     const tableName = req.params.tablename
-    // const obj = {
-    //     produtos_id: req.body.produtos_id,
-    //     cliente_id: cliente_id
-    // }
+   
 
     sql.insert(tableName, req.body)
         .then(e => {
             res.json({ mensagem: e });
-            // res.json({ mensagem: `Dados recebidos` });
         }).catch(err => {
             res.json({ err: 'erro, não salvou' })
         })
@@ -230,11 +217,8 @@ app.post('/add/:tablename', (req, res) => {
 
 app.post('/update/:tablename/:id', (req, res) => {
 
-    // const hierarquia = 1
     const validToken = verificarToken(req, res)
-    // const validHierarchy = verificarNivelHierarquico(req, res, hierarquia)
-    // if(!validToken) { res.json({err: 'Token inválido'}); return }
-    // if(!validHierarchy) { res.json({err: 'Nivel hierárquico insuficiente'}); return }
+    
 
     const id = req.params.id
     const tableName = req.params.tablename

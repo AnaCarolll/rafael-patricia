@@ -98,10 +98,10 @@ function info() {
         .then(e => {
             if (e.hierarquia == 1) {
                 localStorage.setItem('cliente_id', e.id)
-                window.location.href = '/crud_produtos.html'
+                window.location.href = './listagemDeProdutos/crud_produtos.html'
             } else {
                 localStorage.setItem('cliente_id', e.id)
-                window.location.href = '/lista.html'
+                window.location.href = './listagemDeProdutos/lista.html'
             }
         })
 }
