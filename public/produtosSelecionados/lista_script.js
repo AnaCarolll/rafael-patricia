@@ -110,3 +110,41 @@ function itemsMarked(id) {
 
 function plus(id) { getJson('http://localhost:3000/plus/' + id) }
 function less(id) { getJson('http://localhost:3000/less/' + id) }
+
+
+function itemsMarked(id) {
+  getJson('http://localhost:3000/produtos_id/' + id, e => {
+      const lista = e.produto_id?.split(',')
+      Array.from(document.querySelectorAll('input')).filter(e => lista?.includes(e.id)).map(e => e.checked = true)
+  })
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const btnVerPresentes = document.createElement("button")
+  btnVerPresentes.innerText = "Ver presentes"
+  btnVerPresentes.style.cssText = "position: fixed; top: 20px; right: 20px; padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;"
+  document.body.appendChild(btnVerPresentes)
+
+  btnVerPresentes.addEventListener("click", async function() {
+      const dataToken = await getJsonW('http://localhost:3000/getinfotoken/' + token)
+      const produtosEscolhidos = await getJsonW('http://localhost:3000/produtos_id/' + dataToken.id)
+
+      if (!produtosEscolhidos.produto_id) {
+          Swal.fire("Nenhum presente escolhido", "Você ainda não selecionou nenhum presente.", "info")
+          return
+      }
+
+      const produtosDetalhes = await getJsonW('http://localhost:3000/lista/produto')
+      const listaPresentes = produtosEscolhidos.produto_id.split(',').map(id => {
+          const produto = produtosDetalhes.find(p => p.id == id)
+          return produto ? `<p><img src="${produto.imagemUrl}" width="50"> ${produto.nome} - <a href="${produto.link}" target="_blank">Ver produto</a></p>` : ''
+      }).join('')
+
+      Swal.fire({
+          title: "Seus presentes escolhidos",
+          html: `<div style="text-align:left;">${listaPresentes}</div>`,
+          icon: "info",
+          confirmButtonText: "Fechar"
+      })
+  })
+})
