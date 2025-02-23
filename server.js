@@ -86,7 +86,7 @@ app.get('/lista', (req, res) => {
 })
 
 app.get('/produtos_id/:cliente_id', (req, res) => {
-    const cliente_id = req.params.cliente_id; // Obtém o ID do cliente da URL
+    const cliente_id = req.params.cliente_id; 
 
     sql.query("SELECT * FROM produtos_escolhidos WHERE cliente_id = ?", [cliente_id])
         .then(result => {
@@ -94,7 +94,6 @@ app.get('/produtos_id/:cliente_id', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({ erro: err.message });
-            // res.json({ erro: err.message });
         });
 });
 
@@ -111,11 +110,7 @@ app.get('/produtos_id_id/:id', (req, res) => {
 });
 
 app.get('/lista/:tablename', (req, res) => {
-    // const hierarquia = 0
-    // const validToken = verificarToken(req, res)
-    // const validHierarchy = verificarNivelHierarquico(req, res, hierarquia)
-    // if(!validToken) { res.json({err: 'Token inválido'}); return }
-    // if(!validHierarchy) { res.json({err: 'Nivel hierárquico insuficiente'}); return }
+    
     const tablename = req.params.tablename
     sql.show(tablename).then(e => res.json(e)).catch(e => res.json({ err: 'não existe tabela' }))
 });
@@ -232,13 +227,7 @@ app.post('/update/:tablename/:id', (req, res) => {
         res.json({ mensagem: 'nvai+' + err });
     })
 
-    // try {
-    //     sql.update(tableName, req.body);
-    //     res.json({ mensagem: 'Dados atualizados com sucesso' });
-    // } catch (error) {
-    //     console.error(error);
-    //     res.status(500).json({ error: 'Erro ao atualizar dados' });
-    // }
+
 });
 
 app.get('/delete/:tablename/:id', (req, res) => {

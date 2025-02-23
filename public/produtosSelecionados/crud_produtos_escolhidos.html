@@ -11,10 +11,10 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="./js/vue.js"></script>
-    <script defer src="./js/vueData.js"></script>
+    <script src="../js/vue.js"></script>
+    <script defer src="../js/vueData.js"></script>
     
-    <script defer src="./js/crud.js"></script>
+    <script defer src="../js/crud.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -139,7 +139,7 @@
 
     </style>
 
-    <link rel="stylesheet" href="./css/features.css">
+    <link rel="stylesheet" href="../css/features.css">
 
 
 </head>
@@ -148,12 +148,12 @@
     <main defer id="app">
         <header class="p-3 d-flex justify-content-between">
             <div>
-                <a class="btn" href="./crud_produtos.html">Produtos</a>
-                <a class="btn" href="./crud_clientes.html">Clientes</a>
-                <a class="btn" href="./crud_produtos_escolhidos.html">Pedidos escolhidos</a>
+                <a class="btn" href="../listagemDeProdutos/crud_produtos.html">Produtos</a>
+                <a class="btn" href="../cadastroDeClientes/_crud_clientes.js">Clientes</a>
+                <a class="btn" href="../produtosSelecionados/crud_produtos_escolhidos.html">Pedidos escolhidos</a>
             </div>
             <button class="btn btn-primary"
-                onclick="localStorage.clear(); window.location.href ='/login/loginpage.html' ">Sair</button>
+                onclick="localStorage.clear(); window.location.href ='../login/loginpage.html' ">Sair</button>
         </header>
 
         <div class="container mt-5">

@@ -98,16 +98,11 @@ function info() {
         .then(e => {
             if (e.hierarquia == 1) {
                 localStorage.setItem('cliente_id', e.id)
-                window.location.href = './listagemDeProdutos/crud_produtos.html'
+                window.location.href = '../listagemDeProdutos/crud_produtos.html'
             } else {
                 localStorage.setItem('cliente_id', e.id)
-                window.location.href = './listagemDeProdutos/lista.html'
+                window.location.href = '../listagemDeProdutos/lista.html'
             }
         })
 }
  
-
-// const tk = localStorage.token
-// fetch('http://localhost:3000/getinfotoken/'+tk)
-// .then(e=>e.json())
-// .then(e=>console.log(e))
