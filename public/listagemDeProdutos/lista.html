@@ -7,9 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
 
-    <script defer src="./js/vueData.js"></script>
-    <script defer src="./js/lista_script.js"></script>
-
+    <script defer src="../js/vueData.js"></script>
+    <script defer src="../js/lista_script.js"></script>
+<script src="../produtosSelecionados/lista_script.js"></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,16 +18,9 @@
 <body>
 
     <div id="app" class="pb-3">
-        <!-- <ul>
-            <li v-for="produto in produtos" :key="produto.id">
-                {{ produto.nome }} - R$ {{ produto.preco }}
-            </li>
-        </ul> -->
 
-       <!-- menu topo -->
        <header class="p-3 flex justify-between">
-            <!-- <button class="p-1 px-8 bg-gray-500 hover:bg-gray-400 cursor-pointer rounded text-white">Sair</button> -->
-            <button class="p-1 px-8 bg-blue-500 hover:bg-blue-400 cursor-pointer rounded text-white" onclick="localStorage.clear(); window.location.href ='loginpage.html' ">Sair</button>            
+            <button class="p-1 px-8 bg-blue-500 hover:bg-blue-400 cursor-pointer rounded text-white" onclick="localStorage.clear(); window.location.href ='/login/loginpage.html' ">Sair</button>            
        </header>
 
         <main class="p-5 w-[2300px] m-auto max-w-9/10">
@@ -55,7 +48,6 @@
             "display: flex; 
             justify-content: flex-end;
             background-color: red; "
-
             class="bg-green-600 hover:opacity-70 cursor-pointer text-white p-3 py-2 rounded max-w-[200px] m-auto">
             Confirmar presente
             </button>

@@ -11,13 +11,11 @@
 .radio_item:checked+div {
     box-shadow: 0px 0px 0px 5px #00a63e;
     scale: 0.9;
-    /* scale: 1.1; */
     opacity: 1;
 }
 
 .confirm{
     width: 50px;
-    /* display: none; */
     opacity: 0;
     position: absolute;
     top: 0px;
@@ -30,27 +28,26 @@
     top: 0px;
     right: 0px;
     translate: -10px -20px;
-    /* display: block; */
     opacity: 1;
     
 }
 
 *{
-    -webkit-user-drag: none; /* Para navegadores Webkit, como o Chrome */
-    user-drag: none; /* Para outros navegadores que suportam */
+    -webkit-user-drag: none; 
+    user-drag: none; 
 }
 .floating-footer {
-    position: fixed;  /* Mantém fixo na tela */
-    bottom: 0px;  /* Cola no rodapé */
-    left: 0;  /* Começa do canto esquerdo */
-    width: 100%;  /* Ocupa toda a largura da tela */
-    background: rgba(0, 0, 0, 0.8);  /* Mantém o fundo cobrindo a tela */
-    padding: 10px 20px;  /* Adiciona um espaço interno */
-    z-index: 1000;  /* Mantém o elemento acima dos outros */
+    position: fixed; 
+    bottom: 0px;  
+    left: 0; 
+    width: 100%; 
+    background: rgba(0, 0, 0, 0.8);  
+    padding: 10px 20px; 
+    z-index: 1000;  
     display: flex;
 }
 
 .floating-footer p {
-    width: 90%;  /* Ocupa quase toda a largura */
-    max-width: 400px;  /* Evita que fique muito largo em telas grandes */
+    width: 90%;  
+    max-width: 400px;  
 }

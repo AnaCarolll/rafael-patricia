@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="../js/vue.js"></script>
+    <script defer src="../js/vueData.js"></script>
+    
+    <script defer src="../js/crud.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .material-icons {
+            font-size: 20px;
+            height: 40px;
+            width: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        td {
+    
+        }
+
+  
+
+        td {
+            vertical-align: middle;
+            max-width: 400px;
+
+        }
+
+        img {
+            height: 80px;
+            width: 80px;
+            border: 5px;
+       
+            box-shadow: 0px 0px 0px 1px gray;
+            margin: 1px;
+        }
+
+        i {
+            font-size: 14px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 3px 10px;
+            font-style: normal;
+            background-color: #00000033;
+            background-color: transparent;
+            margin-right: 5px;
+            border-radius: 3px;
+           
+            display: inline-block;
+            width: 142px;
+            height: 70px;
+            overflow: hidden;
+            background-image: linear-gradient(#55555511, #55555544);
+        }
+
+        i {
+         
+            box-shadow: 3px 3px 0px 0px #00000077;
+        }
+
+
+        .square {
+            display: inline-block;
+            margin: 3px;
+        }
+
+        .ttip {
+            position: relative;
+        }
+
+        .ttip:hover::after {
+            display: block;
+            pointer-events: none;
+        }
+
+
+        .ttip::after {
+            pointer-events: none;
+            content: attr(msg);
+            position: absolute;
+            bottom: 100%;
+            left: 0px;
+            right: 0px;
+            translate: 0 -10px;
+            z-index: 10;
+            font-size: 14px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            padding: 3px 10px;
+            font-style: normal;
+            
+            margin-right: 5px;
+            border-radius: 3px;
+            display: inline-block;
+            display: none;
+            width: 200px;
+            overflow: hidden;
+
+            background-image: linear-gradient(#efefef, #d3d3d3);
+            box-shadow: 3px 3px 0px 0px #00000077;
+            box-shadow: 3px 3px 0px 0px #888888;
+
+        }
+
+
+        .ttip::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 10px;
+            right: 0px;
+            width: 30px;
+            height: 30px;
+            background-color: #6b6b6b;
+            rotate: 45deg;
+            border-right: none;
+            border-bottom: none;
+            display: none;
+            pointer-events: none;
+
+
+        }
+
+        .ttip:hover::before {
+            display: block;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="../css/features.css">
+
+
+</head>
+
+<body id="produtos_escolhidos">
+    <main defer id="app">
+        <header class="p-3 d-flex justify-content-between">
+            <div>
+                <a class="btn" href="../listagemDeProdutos/crud_produtos.html">Produtos</a>
+                <a class="btn" href="../cadastroDeClientes/_crud_clientes.js">Clientes</a>
+                <a class="btn" href="../produtosSelecionados/crud_produtos_escolhidos.html">Pedidos escolhidos</a>
+            </div>
+            <button class="btn btn-primary"
+                onclick="localStorage.clear(); window.location.href ='../login/loginpage.html' ">Sair</button>
+        </header>
+
+        <div class="container mt-5">
+            <h2 class="mb-4">Lista dos itens escolhidos</h2>
+
+            <input type="checkbox" class="nextcloseopen" id="input_checkbox_edit">
+            <section class="modal" id="edit">
+                <div>
+                    <div style="display: flex; justify-content: right;">
+                        <label for="input_checkbox_edit">
+                            <span type="button" class="btn-close"></span>
+                        </label>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label>id</label>
+                        <input class="form-control sel" id="input_id" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label>produto_id</label>
+                        <input class="form-control sel" id="input_produto_id">
+                    </div>
+                
+
+                    <label class="btn btn-secondary" for="input_checkbox_edit" id="bt_edit_cancel">Cancelar</label>
+                    <button type="button" class="btn btn-primary" id="bt_salvar">Salvar</button>
+                    <button type="button" class="btn btn-primary" id="bt_editar">Editar</button>
+
+                </div>
+            </section>
+
+            <input type="checkbox" class="nextcloseopen" id="input_checkbox_delete">
+            <section class="modal" id="input_checkbox_delete">
+                <div>
+                    <div>
+                        <div style="display: flex; justify-content: right;">
+                            <label for="input_checkbox_delete">
+                                <span type="button" class="btn-close"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <h5>Alerta</h5>
+                        </div>
+                        <div>Tem certeza que deseja excluir?</div>
+                        <div
+                            style="display: flex; gap: 10px; text-align: right; justify-content: right; padding-top: 10px;">
+                            <button type="button" class="btn btn-primary" onclick="del(data.id)">Sim</button>
+                            <label type="button" class="btn btn-secondary" for="input_checkbox_delete">Cancelar</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <label class="btn btn-primary mb-2" id="bt_adicionar" for="input_checkbox_edit">Adicionar</label>
+
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Produtos</th>
+                        <th></th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr :for="'r'+produto.id" v-for="(produto, index) in produtos" :key="produto.id">
+                        
+                        <td v-if="users[index] && users[index].cliente_id" v-html="users[index].cliente_email"></td>
+                        <td v-html="users.map(e=>e.nomes)[index]"></td>
+                        <td v-html="users.map(e=>e.images)[index]"></td>
+
+
+                        <td class="td_a" st>
+                            <label for="input_checkbox_edit">
+                                <span for class="btn btn-warning material-icons" :val="produto.id"
+                                    onclick="openEdit(this.getAttribute('val')); ">edit</span>
+                            </label>
+                        </td>
+
+                        <td>
+                            <label for="input_checkbox_delete" :val="produto.id"
+                                onclick="windowAlert(this.getAttribute('val'))"
+                                class="btn btn-danger material-icons del">delete</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+</body>
+
+</html>

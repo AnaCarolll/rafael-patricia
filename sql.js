@@ -1,11 +1,8 @@
-// sql.insert('produto', obj)
 
-// const sqlite3 = require('sqlite3').verbose();
 import sqlite3 from 'sqlite3';
 
 const db = new sqlite3.Database('dados.db');
 
-// cria tabelas
 db.serialize(() => {
     db.run(`
           CREATE TABLE IF NOT EXISTS produto (
@@ -92,7 +89,6 @@ const sql = {
 
     insert(nome_table, obj) {
         return new Promise((resolve, reject) => {
-            // Remove a propriedade 'id' se existir, caso contrário, não faz nada
             if (obj.hasOwnProperty('id')) {
                 delete obj.id;
             }
@@ -134,10 +130,8 @@ const sql = {
 
             db.run(sql, values, function (err) {
                 if (err) {
-                    // console.error('Erro ao atualizar:', err.message);
                     reject('Erro ao atualizar:', err.message)
                 } else {
-                    // console.log(`Linhas atualizadas: ${this.changes}`);
                     resolve(`Linhas atualizadas: ${this.changes}`)
                 }
             });
@@ -147,7 +141,7 @@ const sql = {
 
     query(sql, params = []) {
         return new Promise((resolve, reject) => {
-            db.all(sql, params, (err, rows) => { // db.all() para SELECTs
+            db.all(sql, params, (err, rows) => { 
                 if (err) {
                     reject({ erro: err.message });
                 } else {
@@ -181,7 +175,6 @@ const sql = {
             db.all(`SELECT * FROM ${tableName} WHERE id = ${id}`, [], (err, rows) => {
                 if (err) reject(err);
 
-                // console.log(rows[0])
                 resolve(rows[0]);
 
             });
@@ -192,7 +185,6 @@ const sql = {
         return new Promise((resolve, reject) => {
             db.run(`DELETE FROM ${tableName} WHERE id = ?;`, [id], function (err) {
                 if (err) {
-                    // console.error("Erro ao excluir dados:", err);
                     reject('Erro ao excluir dados')
                     return 'Erro ao excluir dados'
                 } else {
@@ -207,7 +199,6 @@ const sql = {
         return new Promise((resolve, reject) => {
             db.run(`DELETE FROM ${tableName} WHERE ${condition};`, function (err) {
                 if (err) {
-                    // console.error("Erro ao excluir dados:", err);
                     reject('Erro ao excluir dados')
                     return 'Erro ao excluir dados'
                 } else {

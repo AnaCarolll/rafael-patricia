@@ -1,6 +1,4 @@
-// sql.insert('produto', obj)
 
-// const sqlite3 = require('sqlite3').verbose();
 import sqlite3 from 'sqlite3';
 
 const db = new sqlite3.Database('dados.db');
@@ -19,10 +17,8 @@ function clientExists(email) {
 }
 
 
-// clientExists('maria').then(e=>console.log(e))
 
 
-// select
 
 db.serialize(() => {
     db.run(`
@@ -72,8 +68,7 @@ db.serialize(() => {
 
 })
 
-// db.run(`INSERT INTO cliente (email, hierarquia, senha) VALUES ('a', 1, 'a')`);
-// db.run(`INSERT INTO cliente (email, hierarquia, senha) VALUES ('b', 1, 'b')`);
+
 
 
 
@@ -94,9 +89,7 @@ function show(tableName) {
         });
     })
 }
-// show('produto').then(e => console.log(e))
-// show('cliente').then(e => console.log(e))
-// show('produto').then(e => console.log(e))
+
 
 
 function query(query) {
@@ -123,13 +116,8 @@ query(`
     INNER JOIN cliente ON produtos_escolhidos.cliente_id == cliente.id
     `).then(e => console.log(e))
 
-// SELECT cliente.nome AS cliente, produto.nome AS produto
-// FROM compras
-// JOIN cliente ON compras.cliente_id = cliente.id
-// JOIN produto ON compras.produto_id = produto.id;
 
 
-// checa se o usuário existe
 function userExists(name) {
     const lista = []
     return new Promise((resolve, reject) => {
@@ -144,4 +132,3 @@ function userExists(name) {
     })
 }
 
-// userExists('maria').then(e=>console.log(e))

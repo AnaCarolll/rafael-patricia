@@ -40,16 +40,6 @@ function getObj() {
 
 const token = localStorage.getItem('token')
 
-// let data2 = {}
-// const getData = () => {
-//     fetch('http://localhost:3000/lista/' + this.tablename)
-//         .then(e => e.json())
-//         .then(e => {
-//             data2[e.id] = e
-//             vue.data2 = data2
-//         })
-// }
-// getData()
 
 
 
@@ -104,7 +94,6 @@ function update(id, obj) {
             console.log(id)
             console.log(obj)
             input_checkbox_edit.checked = false
-            // refreshData()
         })
 }
 
@@ -115,13 +104,9 @@ function openEdit(id) {
     bt_editar.removeAttribute('style')
 
 
-    // aqui
     GET(baseUrl.list + baseUrl.tablename)
         .then(e => {
             
-            // console.log(e.id)
-            // console.log(data.edit)
-            // const el = e
             input_id.value = e.find(g => g.id == id).id
             input_produto_id.value = e.find(g => g.id == id).produto_id
         })
@@ -149,7 +134,6 @@ bt_adicionar.addEventListener('click', () => {
 
     input_checkbox_edit.checked = false
 
-    //  aqui
     input_id.value = ''
     input_cliente_id.value = ''
     input_produto_id.value = ''
@@ -172,12 +156,10 @@ function refreshData() {
                 e.map(g => {
                     if (!id_list.includes(g.cliente_id)) {
                         id_list.push(g.cliente_id)
-                        // id_list.push(g.cliente_id)
-                        // getInfoId(g.cliente_id)
+                       
                     }
                 })
                 vue.produtos = e
-                // getInfoId(id)
                 id_list.map(id => getInfoId(id))
 
             } catch (err) { }
@@ -191,7 +173,6 @@ fetch('http://localhost:3000/lista/produto')
     .then(e => vue.allProducts.push(e))
 
 function getInfoId(id) {
-    // GET('http://localhost:3000/lista/cliente/'+id)
     fetch('http://localhost:3000/lista/cliente/' + id)
         .then(e => e.json())
         .then(e => vue.users.push(e))
