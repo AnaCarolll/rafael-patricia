@@ -45,9 +45,9 @@ db.serialize(() => {
 
     db.run(`
         INSERT INTO cliente (email, hierarquia, senha) 
-        SELECT 'b', 1, 'b'
+        SELECT 'admin', 1, 'admin'
         WHERE NOT EXISTS (
-            SELECT 1 FROM cliente WHERE email = 'b'
+            SELECT 1 FROM cliente WHERE email = 'admin'
         );
     `);
 

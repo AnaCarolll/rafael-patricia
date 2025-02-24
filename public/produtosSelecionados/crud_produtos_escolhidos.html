@@ -14,7 +14,7 @@
     <script src="../js/vue.js"></script>
     <script defer src="../js/vueData.js"></script>
     
-    <script defer src="../js/crud.js"></script>
+    <script defer src="../router/crud.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -28,9 +28,9 @@
             align-items: center;
         }
 
-        td {
+        /* td {
     
-        }
+        } */
 
   
 
@@ -140,6 +140,7 @@
     </style>
 
     <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/features.css">
 
 
 </head>
@@ -153,11 +154,11 @@
                 <a class="btn" href="../produtosSelecionados/crud_produtos_escolhidos.html">Pedidos escolhidos</a>
             </div>
             <button class="btn btn-primary"
-                onclick="localStorage.clear(); window.location.href ='../login/loginpage.html' ">Sair</button>
+                onclick="localStorage.clear(); window.location.href ='/login/loginpage.html' ">Sair</button>
         </header>
 
         <div class="container mt-5">
-            <h2 class="mb-4">Lista dos itens escolhidos</h2>
+            <h2 class="mb-4">Lista dos presentes escolhidos</h2>
 
             <input type="checkbox" class="nextcloseopen" id="input_checkbox_edit">
             <section class="modal" id="edit">
@@ -213,30 +214,36 @@
 
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Produtos</th>
+                    <tr style="text-align: center;">
+                        <th>Nome usuário</th>
+                        <th>Nome produto</th>
+                        <th>Imagem produto</th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th>Editar</th>
                         <th>Excluir</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="text-align: center;">
                     <tr :for="'r'+produto.id" v-for="(produto, index) in produtos" :key="produto.id">
                         
                         <td v-if="users[index] && users[index].cliente_id" v-html="users[index].cliente_email"></td>
                         <td v-html="users.map(e=>e.nomes)[index]"></td>
                         <td v-html="users.map(e=>e.images)[index]"></td>
 
+                        <td></td>
+                        <td></td>
+                        <td></td>
 
-                        <td class="td_a" st>
+                        <td class="td_a" st style="text-align: center;">
                             <label for="input_checkbox_edit">
                                 <span for class="btn btn-warning material-icons" :val="produto.id"
                                     onclick="openEdit(this.getAttribute('val')); ">edit</span>
                             </label>
                         </td>
 
-                        <td>
+                        <td class="td_a" st style="display: flex; justify-content: center; height: 104px; align-items: center;">
                             <label for="input_checkbox_delete" :val="produto.id"
                                 onclick="windowAlert(this.getAttribute('val'))"
                                 class="btn btn-danger material-icons del">delete</label>

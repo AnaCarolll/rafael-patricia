@@ -153,6 +153,7 @@ function info() {
     fetch(url)
         .then(e => e.json())
         .then(e => {
+            // Admin
             if (e.hierarquia == 1) {
                 localStorage.setItem('cliente_id', e.id)
                 window.location.href = '../listagemDeProdutos/crud_produtos.html'

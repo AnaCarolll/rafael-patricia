@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../style.css">
 
     <script defer src="../js/vueData.js"></script>
-    <script defer src="../js/lista_script.js"></script>
-<script src="../produtosSelecionados/lista_script.js"></script>
+    <script defer src="../produtosSelecionados/lista_script.js"></script>
+
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -20,7 +20,7 @@
     <div id="app" class="pb-3">
 
        <header class="p-3 flex justify-between">
-            <button class="p-1 px-8 bg-blue-500 hover:bg-blue-400 cursor-pointer rounded text-white" onclick="localStorage.clear(); window.location.href ='/login/loginpage.html' ">Sair</button>            
+            <button class="p-1 px-8 bg-blue-500 hover:bg-blue-400 cursor-pointer rounded text-white" onclick="localStorage.clear(); window.location.href ='../login/loginpage.html' ">Sair</button>
        </header>
 
         <main class="p-5 w-[2300px] m-auto max-w-9/10">
@@ -29,13 +29,13 @@
                 <label :for="produto.id" v-for="produto in produtos" :key="produto.id">
                     <input type="checkbox" name="r" class="radio_item" :id="produto.id">
                     <div class="cursor-pointer w-50 shadow-2xl rounded p-2 relative h-90 grid">
-                        <img draggable="false" src="./imgs/confirm-icon.webp" class="confirm">
+                        <img draggable="false" src="../imgs/confirm-icon.webp" class="confirm">
                         <img :src="produto.imagemUrl">
                         <h1 class="text-md">{{produto.nome.slice(0, 70)}}...</h1>
-                        <p class="font-mono text-gray-500 mt-auto" v-html="'limite: '+produto.quantidade_escolhida+'/'+produto.quantidade_disponivel">1/2</p>
+                        <!-- <p class="font-mono text-gray-500 mt-auto" v-html="'limite: '+produto.quantidade_escolhida+'/'+produto.quantidade_disponivel">1/2</p> -->
                         <a class="mt-auto" target="_blank" :href="produto.link">
                             <p
-                                class="border-blue-500 hover:bg-blue-500 hover:text-white border-1 uppercase text-blue-500 text-xs p-3 py-2 rounded font-bold">
+                                class="border-blue-500 hover:bg-blue-500 hover:text-white border-1 uppercase text-blue-500 text-xs p-3 py-2 rounded font-bold" style="text-align: center;">
                                 Acesse aqui o link</p>
                         </a>
                     </div>

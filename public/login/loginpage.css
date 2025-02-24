@@ -45,6 +45,11 @@ label {
     /* color: aqua; */
 }
 
+label:hover {
+    color: #007bff;
+    cursor: pointer;
+}
+
 input {
     width: 100%;
     padding: 8px;
@@ -75,7 +80,7 @@ input {
     margin-top: 5px;
 }
 
-.buttons-float{
+/* .buttons-float{
     position: absolute;
     top: 10px;
     left: 0px;
@@ -84,7 +89,7 @@ input {
     margin: auto;
     display: flex;
     gap: 10px;
-}
+} */
 
 .radio{display: none;}
 
@@ -94,8 +99,6 @@ input {
 .radio:checked + *{
     display: block;
 }
-
-
 
 .password-container {
     position: relative;
