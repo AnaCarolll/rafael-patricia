@@ -96,7 +96,7 @@ async function postJsonW(url, obj, callback) {
 getJson('http://localhost:3000/lista/produto', e => vue.produtos = e)
 
 getJson('http://localhost:3000/getinfotoken/' + token, e => {
-  if (e.msg == 'error') window.location.href = './loginpage.html'
+  if (e.msg == 'error') window.location.href = '/login/loginpage.html'
   itemsMarked(e.id)
 })
 

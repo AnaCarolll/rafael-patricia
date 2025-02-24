@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autenticação</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="./loginpage.html">
     <link rel="stylesheet" href="./loginpage.css">
     <script defer src="./loginpage.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
 </head>
 
 <body>
 
-    <!-- <div class="buttons-float">
-        <label for="r1" class="btn">Entrar</label>
-        <label for="r2" class="btn">Cadastrar</label>
-    </div> -->
-
+        <!-- login de usuario -->
 
     <input id="r1" class="radio" type="radio" name="r1" checked>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2 class=" ">Login</h2>
         <div>
             <div class="input-group">
                 <label for="username">Usuário</label>
@@ -30,8 +35,12 @@
                 <div class="password-container">
                     <input type="password" id="signin_senha" name="senha" placeholder="Digite sua senha" required 
                         oninput="showEyeIcon('signin_senha', 'eyeIconLogin')">
-                    <span class="toggle-password" id="eyeIconLogin" onclick="togglePassword('signin_senha', 'eyeIconLogin')" style="display: none;">
-                        👁️
+                    <span
+                     class="material-symbols-outlined toggle-password" 
+                     id="eyeIconLogin" 
+                     onclick="togglePassword('signin_senha', 'eyeIconLogin')" 
+                     style="display: none">
+                     visibility_off
                     </span>
                 </div>
             </div>
@@ -40,35 +49,48 @@
 
         </div>
             <button id="btn_signin" type="submit" class="btn">Entrar</button>
+            <label for="r2" style="margin-top: 10px; cursor: pointer;">Cadastrar</label>
+
         </div>
         <p class="error-message" id="error-message"></p>
     </div>
 
 
-    
+        <!-- cadastro de usuario -->
     <input id="r2" class="radio" type="radio" name="r1">
     <div class="login-container">
         <h2>Cadastro</h2>
         <div>
             <div class="input-group">
-                <label for="username">Usuário</label>
-                <input type="text" id="signup_email" name="username" placeholder="Digite seu usuário" required>
+                <label for="username">Email</label>
+                <input type="text" id="signup_email" name="username" placeholder="Digite seu email" required>
+                <p id="email_error" class="error-message">*O campo de e-mail é obrigatório e deve ser válido.</p>
+
             </div>
     
             <div class="input-group">
                 <label for="senha">Senha</label>
                 <div class="password-container">
-                    <input type="password" id="signup_senha" name="senha" placeholder="Digite sua senha" required 
-                        oninput="showEyeIcon('signup_senha', 'eyeIconSignup')">
-                    <span class="toggle-password" id="eyeIconSignup" onclick="togglePassword('signup_senha', 'eyeIconSignup')" style="display: none;">
-                        👁️
+                    <input type="password" 
+                    id="signin_senha" 
+                    name="senha"    
+                    placeholder="Digite sua senha" 
+                    required 
+                    oninput="handlePasswordInput('signin_senha', 'eyeIconLogin')"
+                    >
+                    <span
+                        class="material-symbols-outlined toggle-password" 
+                        id="eyeIconLogin" 
+                        onclick="togglePassword('signin_senha', 'eyeIconLogin')" 
+                        style="display: none">
+                        visibility
                     </span>
                 </div>
             </div>
-
-            <label for="r1" style="text-align: right; margin: 0 10px 10px 0">Fazer login</label>
     
             <button id="btn_signup" type="submit" class="btn">Cadastrar</button>
+            <label for="r1" style="margin-top: 10px;cursor: pointer;" >Entrar</label>
+
         </div>
         <p class="error-message" id="error-message"></p>
     </div>
@@ -79,6 +101,25 @@
 </html>
 
 <script>
+
+
+
+
+    function handlePasswordInput(inputId, eyeIconId) {
+    showEyeIcon(inputId, eyeIconId);
+    validatePassword(inputId);
+}
+    function validatePassword() {
+    const senha = document.getElementById('signin_senha');
+    const errorMessage = document.getElementById('password-error');
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!regex.test(senha.value)) {
+        errorMessage.style.display = 'inline';  
+    } else {
+        errorMessage.style.display = 'none';  
+    }
+}
 function togglePassword(inputId, eyeIconId) {
     var senhaInput = document.getElementById(inputId);
     var eyeIcon = document.getElementById(eyeIconId);
@@ -86,10 +127,10 @@ function togglePassword(inputId, eyeIconId) {
     if (senhaInput && eyeIcon) { 
         if (senhaInput.type === "password") {
             senhaInput.type = "text";
-            eyeIcon.textContent = "👁️‍🗨️"; 
+            eyeIcon.innerText = "visibility"; // Mostra o olho aberto
         } else {
             senhaInput.type = "password";
-            eyeIcon.textContent = "👁️"; 
+            eyeIcon.innerText = "visibility_off"; // Mostra o olho fechado
         }
     } else {
         console.error("Erro: Elemento não encontrado!", inputId, eyeIconId);

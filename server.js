@@ -1,16 +1,10 @@
-// const express = require('express');
-// const path = require('path');
 
-// const sql = require('./sql.js')
 
 import express from "express";
 const app = express();
 const port = 3000;
 import sql from './sql.js';
 
-// app.use((req, res, next) => {
-//     res.status(404).send('Página não encontrada'); 
-// });
 app.use(express.static("public"));
 app.use(express.json());
 
@@ -93,7 +87,7 @@ app.get('/lista', (req, res) => {
 })
 
 app.get('/produtos_id/:cliente_id', (req, res) => {
-    const cliente_id = req.params.cliente_id; // Obtém o ID do cliente da URL
+    const cliente_id = req.params.cliente_id; 
 
     sql.query("SELECT * FROM produtos_escolhidos WHERE cliente_id = ?", [cliente_id])
         .then(result => {
@@ -101,7 +95,6 @@ app.get('/produtos_id/:cliente_id', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({ erro: err.message });
-            // res.json({ erro: err.message });
         });
 });
 
@@ -118,11 +111,7 @@ app.get('/produtos_id_id/:id', (req, res) => {
 });
 
 app.get('/lista/:tablename', (req, res) => {
-    // const hierarquia = 0
-    // const validToken = verificarToken(req, res)
-    // const validHierarchy = verificarNivelHierarquico(req, res, hierarquia)
-    // if(!validToken) { res.json({err: 'Token inválido'}); return }
-    // if(!validHierarchy) { res.json({err: 'Nivel hierárquico insuficiente'}); return }
+    
     const tablename = req.params.tablename
     sql.show(tablename).then(e => res.json(e)).catch(e => res.json({ err: 'não existe tabela' }))
 });
@@ -194,7 +183,6 @@ app.post('/cliente', (req, res) => {
     sql.insert('cliente', obj)
         .then(e => res.json({ mensagem: e }))
 
-    // res.json({ mensagem: msg });
 });
 
 app.post('/produtos_escolhidos', (req, res) => {
@@ -209,19 +197,14 @@ app.post('/produtos_escolhidos', (req, res) => {
 
 app.post('/add/:tablename', (req, res) => {
 
-    // const cliente_id = tokens[req.headers.authorization].id
     const cliente_id = ''
 
     const tableName = req.params.tablename
-    // const obj = {
-    //     produtos_id: req.body.produtos_id,
-    //     cliente_id: cliente_id
-    // }
+   
 
     sql.insert(tableName, req.body)
         .then(e => {
             res.json({ mensagem: e });
-            // res.json({ mensagem: `Dados recebidos` });
         }).catch(err => {
             res.json({ err: 'erro, não salvou' })
         })
@@ -230,11 +213,8 @@ app.post('/add/:tablename', (req, res) => {
 
 app.post('/update/:tablename/:id', (req, res) => {
 
-    // const hierarquia = 1
     const validToken = verificarToken(req, res)
-    // const validHierarchy = verificarNivelHierarquico(req, res, hierarquia)
-    // if(!validToken) { res.json({err: 'Token inválido'}); return }
-    // if(!validHierarchy) { res.json({err: 'Nivel hierárquico insuficiente'}); return }
+    
 
     const id = req.params.id
     const tableName = req.params.tablename
@@ -248,13 +228,7 @@ app.post('/update/:tablename/:id', (req, res) => {
         res.json({ mensagem: 'nvai+' + err });
     })
 
-    // try {
-    //     sql.update(tableName, req.body);
-    //     res.json({ mensagem: 'Dados atualizados com sucesso' });
-    // } catch (error) {
-    //     console.error(error);
-    //     res.status(500).json({ error: 'Erro ao atualizar dados' });
-    // }
+
 });
 
 app.get('/delete/:tablename/:id', (req, res) => {

@@ -58,6 +58,25 @@ function record(nome_table, obj) {
 
 btn_signin.addEventListener('click', e => {
 
+ // Pegando os elementos do DOM corretamente
+ const signupEmail = document.getElementById('signup_email');
+ const signupSenha = document.getElementById('signup_senha');
+ const emailError = document.getElementById('email_error');
+
+ //Verificando se os dados  existem antes de cadastra-los
+
+ if (!signupEmail || !signupSenha || signupEmail.value.trim() === "" || signupSenha.value.trim() === "") {
+     console.error("Campos de e-mail ou senha não encontrados ou estão vazios!");
+     alert("Erro: Os campos de e-mail e senha são obrigatórios e não podem estar vazios!");
+     return;
+ }
+
+ const email = signupEmail.value.trim();
+ const senha = signupSenha.value.trim();
+
+
+
+
     const obj = {
         email: signin_email.value,
         senha: signin_senha.value
@@ -72,20 +91,58 @@ btn_signin.addEventListener('click', e => {
         .then(data => {
            
             console.log(data)
-            if(data.token == 'não existe usuário') return
+            if(data.token == 'não existe usuário'){
+                alert('usuario não existe')
+                return
+            }
             localStorage.setItem('token', data.token)
             info()
         })
 })
 
 btn_signup.addEventListener('click', e => {
+    // Pegando os elementos do DOM corretamente
+    const signupEmail = document.getElementById('signup_email');
+    const signupSenha = document.getElementById('signup_senha');
+    const emailError = document.getElementById('email_error');
+
+    //Verificando se os dados  existem antes de cadastra-los
+
+    if (!signupEmail || !signupSenha || signupEmail.value.trim() === "" || signupSenha.value.trim() === "") {
+        console.error("Campos de e-mail ou senha não encontrados ou estão vazios!");
+        alert("Erro: Os campos de e-mail e senha são obrigatórios e não podem estar vazios!");
+        return;
+    }
+
+    const email = signupEmail.value.trim();
+    const senha = signupSenha.value.trim();
+
+
+   //Expressão regular para validar o e-mail
+    // const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // if (!emailValido.test(email)) {
+    //     emailError.style.display = 'block';
+    //     alert("Por favor, insira um e-mail válido.");
+    //     return;
+    // } else {
+    //     emailError.style.display = 'none'; // Esconde a mensagem se o e-mail for válido
+
+    // }
+
     const obj = {
-        email: signup_email.value,
-        senha: signup_senha.value,
+        email: email,
+        senha: senha,
         hierarquia: 0
     }
-    record('cliente', obj)
-})
+
+    record('cliente', obj);
+});
+
+document.getElementById('signup_email').addEventListener('input', () => {
+    const emailError = document.getElementById('email_error');
+    emailError.style.display = 'none';
+});
 
 
 
@@ -100,7 +157,6 @@ function info() {
             if (e.hierarquia == 1) {
                 localStorage.setItem('cliente_id', e.id)
                 window.location.href = '../listagemDeProdutos/crud_produtos.html'
-            // Convidados
             } else {
                 localStorage.setItem('cliente_id', e.id)
                 window.location.href = '../listagemDeProdutos/lista.html'
@@ -108,8 +164,3 @@ function info() {
         })
 }
  
-
-// const tk = localStorage.token
-// fetch('http://localhost:3000/getinfotoken/'+tk)
-// .then(e=>e.json())
-// .then(e=>console.log(e))
